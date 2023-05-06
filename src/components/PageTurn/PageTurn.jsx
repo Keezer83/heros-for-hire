@@ -1,4 +1,8 @@
-export default function PageTurn({ charactersPerPage, totalCharacters }) {
+export default function PageTurn({
+  charactersPerPage,
+  totalCharacters,
+  paginate,
+}) {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalCharacters / charactersPerPage); i++) {
     pageNumbers.push(i);
@@ -14,7 +18,7 @@ export default function PageTurn({ charactersPerPage, totalCharacters }) {
         </li>
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
-            <a href="!#" className="page-link">
+            <a onClick={() => paginate(number)} href="!#" className="page-link">
               {number}
             </a>
           </li>

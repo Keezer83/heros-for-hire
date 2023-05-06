@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import Characters from "./components/Characters/Characters";
 import PageTurn from "./components/PageTurn/PageTurn";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CharacterTable from "./components/CharacterTable/CharacterTable";
@@ -32,6 +31,8 @@ function App() {
     indexOfLastCharacter
   );
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <>
       <div className="container mt-5">
@@ -41,6 +42,7 @@ function App() {
         <PageTurn
           charactersPerPage={charactersPerPage}
           totalCharacters={characters.length}
+          paginate={paginate}
         />
       </div>
     </>

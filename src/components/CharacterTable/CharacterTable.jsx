@@ -6,8 +6,8 @@ export default function CharacterTable({ characters, loading }) {
   }
 
   return (
-    <div className="list-group mb-4">
-      <table>
+    <div className="mb-4">
+      <table className="table table-bordered table-dark opacity-75">
         <thead>
           <tr>
             <th>Character Name</th>
