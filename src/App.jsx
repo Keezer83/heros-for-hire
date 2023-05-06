@@ -10,7 +10,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [charactersPerPage, setCharactersPerPage] = useState(10);
+  const [charactersPerPage] = useState(10);
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -38,7 +38,6 @@ function App() {
       <div className="container mt-5">
         <h1 className="text-primary mb-3">Title Pending</h1>
         <CharacterTable characters={currentCharacters} loading={loading} />
-        {/* <Characters characters={currentCharacters} loading={loading} /> */}
         <PageTurn
           charactersPerPage={charactersPerPage}
           totalCharacters={characters.length}

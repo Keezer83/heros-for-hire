@@ -22,6 +22,7 @@ export default function CharacterTable({ characters, loading }) {
           {characters.map((character) => {
             return (
               <Characters
+                key={character.id}
                 //checking to see if I am passing the character props through properly
                 {...character}
               />
