@@ -1,12 +1,24 @@
-export default function Characters(props) {
+export default function Characters({
+  images,
+  name,
+  biography,
+  appearance,
+  OnCharacterClick,
+}) {
   return (
     <tr>
-      <td>{props.name}</td>
-      <td>{props.biography.firstAppearance}</td>
-      <td>{props.appearance.height[0]}</td>
-      <td>{props.appearance.weight[0]}</td>
-      <td>{props.biography.placeOfBirth}</td>
-      <td>{props.appearance.race}</td>
+      <td>
+        <img
+          onClick={() => OnCharacterClick({ images, name })}
+          src={images.xs}
+        />
+      </td>
+      <td>{name}</td>
+      <td>{biography.firstAppearance}</td>
+      <td>{appearance.height[0]}</td>
+      <td>{appearance.weight[0]}</td>
+      <td>{biography.placeOfBirth}</td>
+      <td>{appearance.race}</td>
     </tr>
   );
 }

@@ -4,13 +4,16 @@ import "./App.css";
 import PageTurn from "./components/PageTurn/PageTurn";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CharacterTable from "./components/CharacterTable/CharacterTable";
+import CharacterSearch from "./components/CharacterSearch/CharacterSearch";
+import Modal from "./components/Modal/Modal";
 
 function App() {
-  // const { imageURL } = this.state;
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [charactersPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
 
   useEffect(() => {
     const fetchCharacters = async () => {
@@ -24,23 +27,60 @@ function App() {
     fetchCharacters();
   }, []);
 
-  const indexOfLastCharacter = currentPage * charactersPerPage;
-  const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage;
-  const currentCharacters = characters.slice(
-    indexOfFirstCharacter,
-    indexOfLastCharacter
+  const paginate = (pageNumber) => {
+    if (pageNumber === "prev") {
+      setCurrentPage(currentPage - 1);
+    } else if (pageNumber === "next") {
+      setCurrentPage(currentPage + 1);
+    } else {
+      setCurrentPage(pageNumber);
+    }
+  };
+
+  const handleSearch = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    setCurrentPage(1);
+  };
+
+  const filteredCharacters = characters.filter((character) =>
+    character.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const indexOfLastFilteredCharacter = currentPage * charactersPerPage;
+  const indexOfFirstFilteredCharacter =
+    indexOfLastFilteredCharacter - charactersPerPage;
+  const currentFilteredCharacters = filteredCharacters.slice(
+    indexOfFirstFilteredCharacter,
+    indexOfLastFilteredCharacter
+  );
+
+  const OnCharacterClick = (character) => {
+    setSelectedCharacter(character);
+    console.log(character);
+  };
 
   return (
     <>
-      <div className="container mt-5">
-        <h1 className="text-primary mb-3">Title Pending</h1>
-        <CharacterTable characters={currentCharacters} loading={loading} />
+      <div className="container mt-5 d-flex-column">
+        <h1 className="text-primary mb-3 text-center">
+          Hero or Villian: Make a Choice
+        </h1>
+        {selectedCharacter && (
+          <Modal
+            character={selectedCharacter}
+            onClose={() => setSelectedCharacter(null)}
+          />
+        )}
+        <CharacterSearch handleSearch={handleSearch} />
+        <CharacterTable
+          characters={currentFilteredCharacters}
+          loading={loading}
+          OnCharacterClick={OnCharacterClick}
+        />
         <PageTurn
           charactersPerPage={charactersPerPage}
-          totalCharacters={characters.length}
+          totalCharacters={filteredCharacters.length}
+          currentPage={currentPage}
           paginate={paginate}
         />
       </div>

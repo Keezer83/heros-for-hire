@@ -1,6 +1,10 @@
 import Characters from "../Characters/Characters";
 
-export default function CharacterTable({ characters, loading }) {
+export default function CharacterTable({
+  characters,
+  loading,
+  OnCharacterClick,
+}) {
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -10,6 +14,7 @@ export default function CharacterTable({ characters, loading }) {
       <table className="table table-bordered table-dark opacity-75">
         <thead>
           <tr>
+            <td>Picture</td>
             <th>Character Name</th>
             <th>First Appearance</th>
             <th>Height</th>
@@ -23,8 +28,8 @@ export default function CharacterTable({ characters, loading }) {
             return (
               <Characters
                 key={character.id}
-                //checking to see if I am passing the character props through properly
                 {...character}
+                OnCharacterClick={OnCharacterClick}
               />
             );
           })}
