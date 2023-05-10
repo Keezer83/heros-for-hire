@@ -7,7 +7,6 @@ export default function Modal({ character, onClose }) {
     setIsHidden(true);
     if (typeof onClose === "function") {
       onClose();
-      console.log(character);
     }
   };
 

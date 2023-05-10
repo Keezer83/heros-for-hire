@@ -56,7 +56,6 @@ function App() {
 
   const OnCharacterClick = (character) => {
     setSelectedCharacter(character);
-    console.log(character);
   };
 
   return (
