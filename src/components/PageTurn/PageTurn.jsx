@@ -32,7 +32,7 @@ export default function PageTurn({
     <nav className="opacity-75 pagination-bg">
       <ul className="pagination justify-content-center">
         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <a onClick={() => paginate("prev")} href="!#" className="page-link">
+          <a onClick={() => paginate("prev")} className="page-link">
             Prev
           </a>
         </li>
@@ -43,7 +43,7 @@ export default function PageTurn({
               currentPage === number ? "active" : ""
             }`}
           >
-            <a onClick={() => paginate(number)} href="!#" className="page-link">
+            <a onClick={() => paginate(number)} className="page-link">
               {number}
             </a>
           </li>
@@ -53,7 +53,7 @@ export default function PageTurn({
             currentPage === totalPages ? "disabled" : ""
           }`}
         >
-          <a onClick={() => paginate("next")} href="!#" className="page-link">
+          <a onClick={() => paginate("next")} className="page-link">
             Next
           </a>
         </li>
